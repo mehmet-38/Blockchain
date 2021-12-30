@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!-- Sayfamızın navbar kısmının olduğu main layout  -->
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_MainLayout</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="~/Hackathon/urunAl.css">
+   
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-custom navbar-mainbg sticky-top">
+     
+        <button class="navbar-toggler" data-target="#navbarSupportedContent" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon fas  fa-bars text-white"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item active ">
+                    <a href="/Urun/Index" class="nav-link" style="color: white; font-size: 20px;">
+                        URUN AL
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Urun/UrunSat" class="nav-link" style="color: white; font-size: 20px;">
+                        URUN SAT
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/Login/LogOut" class="nav-link" style="color: white; font-size: 20px;">
+                        ÇIKIŞ
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav> 
+            <div>
+                @RenderBody()
+            </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿@model Blockchain.Models.Entity.urunler
+@{
+    
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<body>
+    <form class="form-group" method="post" style="margin:2rem ; max-width:31rem">
+       
+        <div>
+            <label>Urun Adı</label>
+            <input class="form-control" type="text" name="UrunName" />
+        </div>
+        <div>
+            <label>Fiyat</label>
+            <input class="form-control" type="text" name="fiyat" />
+        </div>
+        <div>
+            <label>Kategori</label>
+         <!--  <input class="form-control" type="text" name="kategori" />-->
+
+
+            @Html.DropDownListFor(m=>m.kategori1.kategoriId,(List<SelectListItem>)ViewBag.kategoriler,new { @class="form-control"})
+            
+        </div>
+        <div>
+            <label>Miktar</label>
+            <input class="form-control" type="text" name="miktar" />
+        </div>
+        <div>
+            <label>Satıcı</label>
+            <input class="form-control" type="text" name="UserName" value="@ViewBag.kullanici2" />
+        </div>
+
+
+        <div style="margin-top:15px">
+            <button class="btn btn-info">Urun Ekle</button>
+        </div>
+    </form>
+  
+</body>

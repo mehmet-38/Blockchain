@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BlockchainDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="fn_SatisDetay_Result">
+    <Property Name="saticiUsername" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="aliciUsername" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="urunKategori" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="urunMiktar" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="urunFiyat" Type="Int32" />
+  </ComplexType>
+  <ComplexType Name="fn_UrunDetay_Result">
+    <Property Name="urunName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fiyat" Type="Int32" />
+    <Property Name="kategori" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="miktar" Type="Int32" />
+    <Property Name="userName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+  </ComplexType>
+  <EntityType Name="kategori">
+    <Key>
+      <PropertyRef Name="kategoriId" />
+    </Key>
+    <Property Name="kategoriId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kategoriAd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="urunler" Relationship="Self.FK_urunler_kategori" FromRole="kategori" ToRole="urunler" />
+  </EntityType>
+  <EntityType Name="kullanici">
+    <Key>
+      <PropertyRef Name="kullaniciId" />
+    </Key>
+    <Property Name="kullaniciId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="ad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="soyad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="para" Type="Int32" />
+    <Property Name="yetki" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="kullaniciSatis" Relationship="Self.FK_kullaniciSatis_kullanici" FromRole="kullanici" ToRole="kullaniciSatis" />
+    <NavigationProperty Name="kullaniciUrunler" Relationship="Self.FK_kullaniciUrunler_kullanici" FromRole="kullanici" ToRole="kullaniciUrunler" />
+  </EntityType>
+  <EntityType Name="kullaniciSatis">
+    <Key>
+      <PropertyRef Name="kullaniciSatisId" />
+    </Key>
+    <Property Name="kullaniciSatisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="satisId" Type="Int32" Nullable="false" />
+    <Property Name="kullaniciId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="kullanici" Relationship="Self.FK_kullaniciSatis_kullanici" FromRole="kullaniciSatis" ToRole="kullanici" />
+    <NavigationProperty Name="satis" Relationship="Self.FK_kullaniciSatis_satis" FromRole="kullaniciSatis" ToRole="satis" />
+  </EntityType>
+  <EntityType Name="kullaniciUrunler">
+    <Key>
+      <PropertyRef Name="kullaniciUrunlerId" />
+    </Key>
+    <Property Name="kullaniciUrunlerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kullaniciId" Type="Int32" Nullable="false" />
+    <Property Name="urunId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="kullanici" Relationship="Self.FK_kullaniciUrunler_kullanici" FromRole="kullaniciUrunler" ToRole="kullanici" />
+    <NavigationProperty Name="urunler" Relationship="Self.FK_kullaniciUrunler_urunler" FromRole="kullaniciUrunler" ToRole="urunler" />
+  </EntityType>
+  <EntityType Name="satis">
+    <Key>
+      <PropertyRef Name="satisId" />
+    </Key>
+    <Property Name="satisId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="saticiUsername" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="aliciUsername" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="urunKategori" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="urunMiktar" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="urunFiyat" Type="Int32" />
+    <Property Name="urunName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="kullaniciSatis" Relationship="Self.FK_kullaniciSatis_satis" FromRole="satis" ToRole="kullaniciSatis" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="urunler">
+    <Key>
+      <PropertyRef Name="urunId" />
+    </Key>
+    <Property Name="urunId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="urunName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fiyat" Type="Int32" />
+    <Property Name="kategori" Type="Int32" />
+    <Property Name="miktar" Type="Int32" />
+    <Property Name="userName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="kategori1" Relationship="Self.FK_urunler_kategori" FromRole="urunler" ToRole="kategori" />
+    <NavigationProperty Name="kullaniciUrunler" Relationship="Self.FK_kullaniciUrunler_urunler" FromRole="urunler" ToRole="kullaniciUrunler" />
+  </EntityType>
+  <Association Name="FK_urunler_kategori">
+    <End Role="kategori" Type="Self.kategori" Multiplicity="0..1" />
+    <End Role="urunler" Type="Self.urunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kategori">
+        <PropertyRef Name="kategoriId" />
+      </Principal>
+      <Dependent Role="urunler">
+        <PropertyRef Name="kategori" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_kullaniciSatis_kullanici">
+    <End Role="kullanici" Type="Self.kullanici" Multiplicity="1" />
+    <End Role="kullaniciSatis" Type="Self.kullaniciSatis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kullanici">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="kullaniciSatis">
+        <PropertyRef Name="kullaniciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_kullaniciUrunler_kullanici">
+    <End Role="kullanici" Type="Self.kullanici" Multiplicity="1" />
+    <End Role="kullaniciUrunler" Type="Self.kullaniciUrunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kullanici">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="kullaniciUrunler">
+        <PropertyRef Name="kullaniciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_kullaniciSatis_satis">
+    <End Role="satis" Type="Self.satis" Multiplicity="1" />
+    <End Role="kullaniciSatis" Type="Self.kullaniciSatis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="satis">
+        <PropertyRef Name="satisId" />
+      </Principal>
+      <Dependent Role="kullaniciSatis">
+        <PropertyRef Name="satisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_kullaniciUrunler_urunler">
+    <End Role="urunler" Type="Self.urunler" Multiplicity="1" />
+    <End Role="kullaniciUrunler" Type="Self.kullaniciUrunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urunler">
+        <PropertyRef Name="urunId" />
+      </Principal>
+      <Dependent Role="kullaniciUrunler">
+        <PropertyRef Name="urunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BlockchainDBEntities4" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="kategori" EntityType="Self.kategori" />
+    <EntitySet Name="kullanici" EntityType="Self.kullanici" />
+    <EntitySet Name="kullaniciSatis" EntityType="Self.kullaniciSatis" />
+    <EntitySet Name="kullaniciUrunler" EntityType="Self.kullaniciUrunler" />
+    <EntitySet Name="satis" EntityType="Self.satis" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="urunler" EntityType="Self.urunler" />
+    <AssociationSet Name="FK_urunler_kategori" Association="Self.FK_urunler_kategori">
+      <End Role="kategori" EntitySet="kategori" />
+      <End Role="urunler" EntitySet="urunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_kullaniciSatis_kullanici" Association="Self.FK_kullaniciSatis_kullanici">
+      <End Role="kullanici" EntitySet="kullanici" />
+      <End Role="kullaniciSatis" EntitySet="kullaniciSatis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_kullaniciUrunler_kullanici" Association="Self.FK_kullaniciUrunler_kullanici">
+      <End Role="kullanici" EntitySet="kullanici" />
+      <End Role="kullaniciUrunler" EntitySet="kullaniciUrunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_kullaniciSatis_satis" Association="Self.FK_kullaniciSatis_satis">
+      <End Role="satis" EntitySet="satis" />
+      <End Role="kullaniciSatis" EntitySet="kullaniciSatis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_kullaniciUrunler_urunler" Association="Self.FK_kullaniciUrunler_urunler">
+      <End Role="urunler" EntitySet="urunler" />
+      <End Role="kullaniciUrunler" EntitySet="kullaniciUrunler" />
+    </AssociationSet>
+    <FunctionImport Name="fn_SatisDetay" IsComposable="true" ReturnType="Collection(BlockchainDBModel.fn_SatisDetay_Result)">
+      <Parameter Name="satisId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="fn_UrunDetay" IsComposable="true" ReturnType="Collection(BlockchainDBModel.fn_UrunDetay_Result)" />
+    <FunctionImport Name="MusteriGetir" ReturnType="Collection(BlockchainDBModel.MusteriGetir_Result)" />
+    <FunctionImport Name="SatisGetir" ReturnType="Collection(BlockchainDBModel.SatisGetir_Result)" />
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BlockchainDBModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BlockchainDBModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="MusteriGetir_Result">
+    <Property Type="Int32" Name="kullaniciId" Nullable="false" />
+    <Property Type="String" Name="userName" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="ad" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="soyad" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="sifre" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="para" Nullable="true" />
+    <Property Type="String" Name="yetki" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="SatisGetir_Result">
+    <Property Type="Int32" Name="satisId" Nullable="false" />
+    <Property Type="String" Name="saticiUsername" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="aliciUsername" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="urunKategori" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="urunMiktar" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="urunFiyat" Nullable="true" />
+    <Property Type="String" Name="urunName" Nullable="true" MaxLength="20" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BlockchainDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="kategori">
+    <Key>
+      <PropertyRef Name="kategoriId" />
+    </Key>
+    <Property Name="kategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kategoriAd" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="kullanici">
+    <Key>
+      <PropertyRef Name="kullaniciId" />
+    </Key>
+    <Property Name="kullaniciId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="nvarchar" MaxLength="20" />
+    <Property Name="ad" Type="nvarchar" MaxLength="20" />
+    <Property Name="soyad" Type="nvarchar" MaxLength="20" />
+    <Property Name="sifre" Type="nvarchar" MaxLength="20" />
+    <Property Name="para" Type="int" />
+    <Property Name="yetki" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="kullaniciSatis">
+    <Key>
+      <PropertyRef Name="kullaniciSatisId" />
+    </Key>
+    <Property Name="kullaniciSatisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="satisId" Type="int" Nullable="false" />
+    <Property Name="kullaniciId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="kullaniciUrunler">
+    <Key>
+      <PropertyRef Name="kullaniciUrunlerId" />
+    </Key>
+    <Property Name="kullaniciUrunlerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kullaniciId" Type="int" Nullable="false" />
+    <Property Name="urunId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="satis">
+    <Key>
+      <PropertyRef Name="satisId" />
+    </Key>
+    <Property Name="satisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="saticiUsername" Type="nvarchar" MaxLength="20" />
+    <Property Name="aliciUsername" Type="nvarchar" MaxLength="20" />
+    <Property Name="urunKategori" Type="nvarchar" MaxLength="20" />
+    <Property Name="urunMiktar" Type="nvarchar" MaxLength="20" />
+    <Property Name="urunFiyat" Type="int" />
+    <Property Name="urunName" Type="nchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="urunler">
+    <Key>
+      <PropertyRef Name="urunId" />
+    </Key>
+    <Property Name="urunId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunName" Type="nvarchar" MaxLength="20" />
+    <Property Name="fiyat" Type="int" />
+    <Property Name="kategori" Type="int" />
+    <Property Name="miktar" Type="int" />
+    <Property Name="userName" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'BlockchainDB.dbo.Alici Users' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Alici Users">
+          <Property Name="userName" Type="nvarchar" MaxLength="20" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'BlockchainDB.dbo.Satici Users' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Satici Users">
+          <Property Name="userName" Type="nvarchar" MaxLength="20" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'BlockchainDB.dbo.Urun Goster' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Urun Goster">
+          <Property Name="urunName" Type="nvarchar" MaxLength="20" />
+          <Property Name="kategori" Type="nvarchar" MaxLength="20" />
+          <Property Name="miktar" Type="int" />
+        </EntityType>-->
+  <Association Name="FK_kullaniciSatis_kullanici">
+    <End Role="kullanici" Type="Self.kullanici" Multiplicity="1" />
+    <End Role="kullaniciSatis" Type="Self.kullaniciSatis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kullanici">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="kullaniciSatis">
+        <PropertyRef Name="kullaniciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_kullaniciSatis_satis">
+    <End Role="satis" Type="Self.satis" Multiplicity="1" />
+    <End Role="kullaniciSatis" Type="Self.kullaniciSatis" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="satis">
+        <PropertyRef Name="satisId" />
+      </Principal>
+      <Dependent Role="kullaniciSatis">
+        <PropertyRef Name="satisId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_kullaniciUrunler_kullanici">
+    <End Role="kullanici" Type="Self.kullanici" Multiplicity="1" />
+    <End Role="kullaniciUrunler" Type="Self.kullaniciUrunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kullanici">
+        <PropertyRef Name="kullaniciId" />
+      </Principal>
+      <Dependent Role="kullaniciUrunler">
+        <PropertyRef Name="kullaniciId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_kullaniciUrunler_urunler">
+    <End Role="urunler" Type="Self.urunler" Multiplicity="1" />
+    <End Role="kullaniciUrunler" Type="Self.kullaniciUrunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urunler">
+        <PropertyRef Name="urunId" />
+      </Principal>
+      <Dependent Role="kullaniciUrunler">
+        <PropertyRef Name="urunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_urunler_kategori">
+    <End Role="kategori" Type="Self.kategori" Multiplicity="0..1" />
+    <End Role="urunler" Type="Self.urunler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kategori">
+        <PropertyRef Name="kategoriId" />
+      </Principal>
+      <Dependent Role="urunler">
+        <PropertyRef Name="kategori" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="fn_SatisDetay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="satisId" Type="nvarchar" Mode="In" />
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="saticiUsername" Type="nvarchar" MaxLength="20" />
+          <Property Name="aliciUsername" Type="nvarchar" MaxLength="20" />
+          <Property Name="urunKategori" Type="nvarchar" MaxLength="20" />
+          <Property Name="urunMiktar" Type="nvarchar" MaxLength="20" />
+          <Property Name="urunFiyat" Type="int" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="fn_UrunDetay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <ReturnType>
+      <CollectionType>
+        <RowType>
+          <Property Name="urunName" Type="nvarchar" MaxLength="20" />
+          <Property Name="fiyat" Type="int" />
+          <Property Name="kategori" Type="nvarchar" MaxLength="20" />
+          <Property Name="miktar" Type="int" />
+          <Property Name="userName" Type="nvarchar" MaxLength="20" />
+        </RowType>
+      </CollectionType>
+    </ReturnType>
+  </Function>
+  <Function Name="MusteriGetir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SatisGetir" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="BlockchainDBModelStoreContainer">
+    <EntitySet Name="kategori" EntityType="Self.kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kullanici" EntityType="Self.kullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kullaniciSatis" EntityType="Self.kullaniciSatis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kullaniciUrunler" EntityType="Self.kullaniciUrunler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="satis" EntityType="Self.satis" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="urunler" EntityType="Self.urunler" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_kullaniciSatis_kullanici" Association="Self.FK_kullaniciSatis_kullanici">
+      <End Role="kullanici" EntitySet="kullanici" />
+      <End Role="kullaniciSatis" EntitySet="kullaniciSatis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_kullaniciSatis_satis" Association="Self.FK_kullaniciSatis_satis">
+      <End Role="satis" EntitySet="satis" />
+      <End Role="kullaniciSatis" EntitySet="kullaniciSatis" />
+    </AssociationSet>
+    <AssociationSet Name="FK_kullaniciUrunler_kullanici" Association="Self.FK_kullaniciUrunler_kullanici">
+      <End Role="kullanici" EntitySet="kullanici" />
+      <End Role="kullaniciUrunler" EntitySet="kullaniciUrunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_kullaniciUrunler_urunler" Association="Self.FK_kullaniciUrunler_urunler">
+      <End Role="urunler" EntitySet="urunler" />
+      <End Role="kullaniciUrunler" EntitySet="kullaniciUrunler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_urunler_kategori" Association="Self.FK_urunler_kategori">
+      <End Role="kategori" EntitySet="kategori" />
+      <End Role="urunler" EntitySet="urunler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

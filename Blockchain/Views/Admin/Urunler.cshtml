@@ -1,0 +1,37 @@
+﻿@using Blockchain.Models.Entity
+@model List<urunler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Ürün bilgilerinin gösterildiği kısım -->
+@if (ViewBag.admin == "admin")
+{
+    <h2>Ürün  Listesi</h2>
+    <br />
+    <table class="table table-bordered">
+        <tr>
+            <th>Ürün Ad:</th>
+            <th>Kategori:</th>
+            <th>Fiyat:</th>
+            <th>Miktar:</th>
+
+        </tr>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.urunName</td>
+                <td>@x.kategori</td>
+                <td>@x.fiyat</td>
+                <td>@x.miktar</td>
+
+            </tr>
+        }
+    </table>
+
+}
+            else
+            {
+<h2>Bu ekrana sadece admin yetkisi olanlar girebilir!</h2>
+                
+            }

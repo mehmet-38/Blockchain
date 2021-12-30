@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "blockChain";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!--Bu sayfaları sadece admin görebildiği için yetkisinin admin olup 
+    olmadıgını kontrol ettik-->
+@if (ViewBag.admin == "admin")
+{
+    
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+              crossorigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Bebas+Neue&family=Exo+2&display=swap"
+              rel="stylesheet" />
+
+        <link rel="stylesheet" href="~/blockchain-front_new/manage-blockchain_new.css" />
+
+        <title>Manage Blockchain</title>
+    </head>
+    <body>
+        <div id="loaderContainer">
+            <div id="loaderBox">
+                <div id="loader"></div>
+            </div>
+            <div id="loaderContent"></div>
+        </div>
+        <div id="content">
+            <div id="btnGetContainer">
+                <button type="button" value="true" class="btnGet btn">
+                    BLOK İNDEKSİNE GÖRE GETİR
+                </button>
+                <button type="button" value="false" class="btnGet btn">
+                    BLOKLARI AÇARAK GETİR
+                </button>
+            </div>
+            <div id="containerBlockchain"></div>
+        </div>
+        <!--Node js kodları ile bağlantısı-->
+        <script src="~/blockchain-front_new/classRequest_new.js"></script>
+        <script src="~/blockchain-front_new/classUI_new.js"></script>
+        <script src="~/blockchain-front_new/manage-blockchain_new.js"></script>
+    </body>
+</html>
+
+
+
+
+}
+else
+{
+<h3>Bu ekrana sadece admin yetkisi olanlar girebilir!</h3>
+}

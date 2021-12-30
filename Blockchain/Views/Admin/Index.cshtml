@@ -1,0 +1,41 @@
+﻿@using Blockchain.Models.Entity
+@model List<MusteriGetir_Result>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Kullanıcı bilgilernin gösterildiği kısım-->
+@if (ViewBag.admin == "admin")
+{
+    <h2>Kullanici Listesi</h2>
+    
+    <br />
+    <table class="table table-bordered">
+        <tr>
+            <th>User Name:</th>
+            <th>Ad:</th>
+            <th>Soyad:</th>
+            <th>Para:</th>
+            <th>Yetki:</th>
+        </tr>
+        @foreach (var x in Model)
+        {
+            <tr>
+                <td>@x.userName</td>
+                <td>@x.ad</td>
+                <td>@x.soyad</td>
+                <td>@x.para</td>
+                <td>@x.yetki</td>
+            </tr>
+        }
+    </table>
+}
+ else
+{
+<h2>Bu ekrana sadece admin yetkisi olanlar girebilir!</h2>
+ }
+
+
+
+
+

@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = null;
+}
+<!-- Admin sayfamızın ana kısımı -->
+@if (ViewBag.admin == "admin")
+{
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Admin</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+       
+    </head>
+    <body>
+
+        <!-- Sidebar -->
+        <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:15%">
+            <h3 class="w3-bar-item">Menu</h3>
+            <a href="/Admin/Index" class="w3-bar-item w3-button">Kullanıcılar</a>
+            <a href="/Admin/Urunler" class="w3-bar-item w3-button">Ürünler</a>
+            <a href="/Admin/Satis" class="w3-bar-item w3-button">Satışlar</a>
+            <a href="/Admin/blockChain" class="w3-bar-item w3-button">Blockchain</a>
+        </div>
+
+        <!-- Page Content -->
+        <div style="margin-left:15%">
+
+            <div class="w3-container w3-teal">
+                <h3>Admin Yönetim Paneli</h3>
+            </div>
+
+
+
+            <div class="w3-container">
+                @RenderBody()
+            </div>
+
+        </div>
+
+    </body>
+    </html>
+    }
+    else
+    {
+
+    <div class="w3-container">
+        @RenderBody()
+    </div>
+    }
+
+

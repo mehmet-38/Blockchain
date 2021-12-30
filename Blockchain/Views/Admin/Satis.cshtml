@@ -1,0 +1,42 @@
+﻿@using Blockchain.Models.Entity
+@model List<SatisGetir_Result>
+@{
+    ViewBag.Title = "Satis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!-- Satış bilgilerinin gösterildiği kısım -->
+@if (ViewBag.admin == "admin")
+{
+    <h2>Satış  Listesi</h2>
+    <br />
+    <table class="table table-bordered">
+        <tr>
+            <th>Ürün Ad</th>
+            <th>Kategori</th>
+            <th>Fiyat</th>
+            <th>Miktar</th>
+            <th>Satıcı Username</th>
+            <th>Alıcı Username</th>
+
+        </tr>
+        @foreach (var x in Model)
+        {
+    <tr>
+        <td>@x.urunName</td>
+        <td>@x.urunKategori</td>
+        <td>@x.urunFiyat</td>
+        <td>@x.urunMiktar</td>
+        <td>@x.saticiUsername</td>
+        <td>@x.aliciUsername</td>
+    </tr>
+        }
+    </table>
+
+}
+else
+{
+<h2>Bu ekrana sadece admin yetkisi olanlar girebilir!</h2>
+
+}
+
+

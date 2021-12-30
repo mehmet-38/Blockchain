@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="16449c24093a46e7bb1d553670242813" Name="Diagram1">
+        <EntityTypeShape EntityType="BlockchainDBModel.kategori" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlockchainDBModel.kullanici" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlockchainDBModel.kullaniciSatis" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlockchainDBModel.kullaniciUrunler" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlockchainDBModel.satis" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlockchainDBModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlockchainDBModel.urunler" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="BlockchainDBModel.FK_urunler_kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="BlockchainDBModel.FK_kullaniciSatis_kullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="BlockchainDBModel.FK_kullaniciUrunler_kullanici" ManuallyRouted="false" />
+        <AssociationConnector Association="BlockchainDBModel.FK_kullaniciSatis_satis" ManuallyRouted="false" />
+        <AssociationConnector Association="BlockchainDBModel.FK_kullaniciUrunler_urunler" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
